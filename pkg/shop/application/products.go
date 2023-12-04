@@ -24,12 +24,12 @@ type AddProductCommand struct {
 	PriceCurrency string
 }
 
-func NewProductsService() ProductsService {
-
+func NewProductsService(repo products.Repository, readModel productReadModel) ProductsService {
+	return ProductsService{repo, readModel}
 }
 
-func (s ProductsService) AllProducts() {
-
+func (s ProductsService) AllProducts() []products.Product {
+	return s.readModel.AllProducts()
 }
 
 func (s ProductsService) AddProduct(cmd AddProductCommand) error {
